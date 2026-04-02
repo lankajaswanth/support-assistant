@@ -1,0 +1,100 @@
+{
+  "customer_name": "FinSecure Bank",
+  "industry": "Financial Services",
+  "data_classification": "Sensitive Financial Data (PII, Transactions)",
+
+  "environment": {
+    "deployment_type": "On-Premise",
+    "data_center_location": "Dallas, TX",
+    "disaster_recovery_site": "Phoenix, AZ"
+  },
+
+  "infrastructure": {
+    "compute": ["VMware ESXi", "Bare Metal Servers"],
+    "storage": {
+      "primary": "SAN Storage Cluster",
+      "backup_tier": "Tape + Secondary Disk Array"
+    },
+    "database": ["Oracle DB", "SQL Server"],
+    "virtualization": "VMware vCenter"
+  },
+
+  "backup_configuration": {
+    "schedule": "Every 6 hours",
+    "retention_policy": "90 days",
+    "backup_type": "Full + Incremental",
+    "replication": "Enabled to DR site",
+    "encryption": "AES-256 enabled"
+  },
+
+  "data_pipeline": {
+    "source": "Core Banking System",
+    "flow": [
+      "Core DB → ETL Jobs",
+      "ETL → Data Warehouse",
+      "Warehouse → Reporting Systems"
+    ],
+    "frequency": "Batch processing every 2 hours"
+  },
+
+  "network_configuration": {
+    "internal_network": "Private LAN",
+    "firewall": "Strict (Zero Trust Model)",
+    "allowed_ports": [22, 443, 1521],
+    "segmentation": "Database and application tiers isolated",
+    "vpn": "Internal secure VPN for admin access"
+  },
+
+  "security": {
+    "access_control": "Role-Based Access Control (RBAC)",
+    "identity_management": "Active Directory",
+    "encryption": "Data-at-rest and in-transit encrypted",
+    "audit_logging": "SIEM integration enabled",
+    "compliance": ["PCI-DSS", "SOX"]
+  },
+
+  "monitoring": {
+    "tools": ["Splunk", "Nagios"],
+    "alerts": [
+      "Disk usage > 85%",
+      "Backup job failure",
+      "Unauthorized access attempts",
+      "Replication lag"
+    ]
+  },
+
+  "common_issues": [
+    {
+      "issue": "Disk space full",
+      "possible_causes": [
+        "Backup retention not cleaned",
+        "Log files accumulation",
+        "Failed backup retries consuming space"
+      ]
+    },
+    {
+      "issue": "Firewall blocking communication",
+      "possible_causes": [
+        "Port not opened between application and storage",
+        "Incorrect firewall rule configuration",
+        "Network segmentation restrictions"
+      ]
+    },
+    {
+      "issue": "Backup replication delay",
+      "possible_causes": [
+        "Network congestion",
+        "DR site latency",
+        "Replication service failure"
+      ]
+    },
+    {
+      "issue": "Database backup failure",
+      "possible_causes": [
+        "Database lock contention",
+        "Insufficient permissions",
+        "Storage I/O bottleneck"
+      ]
+    }
+  ]
+}

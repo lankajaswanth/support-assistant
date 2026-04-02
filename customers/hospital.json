@@ -1,0 +1,88 @@
+{
+  "customer_name": "CityCare Hospital",
+  "industry": "Healthcare",
+  "data_classification": "PHI (Protected Health Information)",
+
+  "environment": {
+    "cloud_provider": "AWS",
+    "region": "us-east-1",
+    "deployment_type": "Hybrid"
+  },
+
+  "infrastructure": {
+    "compute": ["EC2", "Kubernetes"],
+    "storage": {
+      "primary": "Amazon S3",
+      "backup_tier": "S3 Glacier"
+    },
+    "database": ["RDS (PostgreSQL)", "Snowflake"]
+  },
+
+  "backup_configuration": {
+    "schedule": "Daily at 01:00 AM UTC",
+    "retention_policy": "30 days",
+    "backup_type": "Incremental",
+    "encryption": "AES-256 enabled"
+  },
+
+  "data_pipeline": {
+    "source": "EHR System",
+    "flow": [
+      "EHR → Kafka",
+      "Kafka → S3 (raw layer)",
+      "S3 → Snowflake (analytics)"
+    ],
+    "frequency": "Near real-time"
+  },
+
+  "network_configuration": {
+    "vpc": "vpc-123abc",
+    "subnets": ["private-subnet-1", "private-subnet-2"],
+    "allowed_ports": [22, 443],
+    "firewall": "Enabled",
+    "vpn": "Site-to-Site VPN enabled"
+  },
+
+  "security": {
+    "iam_roles": "Least privilege access enforced",
+    "key_management": "AWS KMS",
+    "audit_logging": "CloudTrail enabled",
+    "compliance": ["HIPAA", "SOC2"]
+  },
+
+  "monitoring": {
+    "tools": ["CloudWatch", "Datadog"],
+    "alerts": [
+      "Backup failure",
+      "High latency",
+      "Unauthorized access attempts"
+    ]
+  },
+
+  "common_issues": [
+    {
+      "issue": "S3 connectivity timeout",
+      "possible_causes": [
+        "VPC endpoint misconfiguration",
+        "Firewall blocking outbound traffic",
+        "Network latency spikes"
+      ]
+    },
+    {
+      "issue": "IAM permission denied",
+      "possible_causes": [
+        "Missing s3:PutObject permission",
+        "Incorrect IAM role attached",
+        "Bucket policy restrictions"
+      ]
+    },
+    {
+      "issue": "Backup job failure",
+      "possible_causes": [
+        "Insufficient storage",
+        "Network interruption",
+        "Service downtime"
+      ]
+    }
+  ]
+}
